@@ -2,6 +2,10 @@
 
 namespace iPresso\Model;
 
+/**
+ * Class Activity
+ * @package iPresso\Model
+ */
 class Activity
 {
     const VAR_KEY = 'key';
@@ -16,17 +20,38 @@ class Activity
     const TYPE_DICTIONARY = 'dictionary';
     const TYPE_INTEGER = 'integer';
     const TYPE_STRING = 'string';
+    const TYPE_DATETIME = 'datetime';
+    const TYPE_BOOL = 'bool';
+    const TYPE_MULTI = 'multi';
 
     public $activity;
+
+    /**
+     * @var string
+     */
     private $key;
+
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * @var array
+     */
     private $parameter = [];
 
+    /**
+     * @var array
+     */
     private static $parameter_types = [
         self::TYPE_DECIMAL,
         self::TYPE_DICTIONARY,
         self::TYPE_INTEGER,
-        self::TYPE_STRING
+        self::TYPE_STRING,
+        self::TYPE_DATETIME,
+        self::TYPE_BOOL,
+        self::TYPE_MULTI,
     ];
 
     /**
