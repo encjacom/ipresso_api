@@ -17,6 +17,7 @@ class Contact
     const VAR_STREET = 'street';
     const VAR_BUILDING_NUMBER = 'buildingNumber';
     const VAR_FLAT_NUMBER = 'flatNumber';
+    const REGION = 'region';
     const VAR_COUNTRY = 'country';
     const VAR_CATEGORY = 'category';
     const VAR_TAG = 'tag';
@@ -73,6 +74,13 @@ class Contact
      * @var string
      */
     private $flat_number = '';
+
+    /**
+     * Region
+     * @var string
+     */
+    private $region = '';
+
 
     /**
      * First name
@@ -474,6 +482,22 @@ class Contact
     /**
      * @return string
      */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param string $region
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @return string
+     */
     public function getFirstName()
     {
         return $this->first_name;
@@ -697,6 +721,9 @@ class Contact
 
         if (!empty($this->flat_number))
             $contact[self::VAR_FLAT_NUMBER] = $this->flat_number;
+
+        if (!empty($this->region))
+            $contact[self::REGION] = $this->region;
 
         if (!empty($this->country))
             $contact[self::VAR_COUNTRY] = $this->country;
