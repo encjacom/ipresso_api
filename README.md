@@ -1,6 +1,6 @@
 # iPresso REST API Client
-[![Total Downloads](https://img.shields.io/packagist/dt/michalper/ipresso_api.svg)](https://packagist.org/packages/michalper/ipresso_api/)
-[![Latest Stable Version](https://img.shields.io/packagist/v/michalper/ipresso_api.svg)](https://packagist.org/packages/michalper/ipresso_api/)
+[![Total Downloads](https://img.shields.io/packagist/dt/michalper/ipresso_api.svg)](https://packagist.org/packages/encjacom/ipresso_api/)
+[![Latest Stable Version](https://img.shields.io/packagist/v/michalper/ipresso_api.svg)](https://packagist.org/packages/encjacom/ipresso_api/)
 
 ## Documentation
 
@@ -11,7 +11,7 @@
 Install the latest version with
 
 ```bash
-$ composer require michalper/ipresso_api
+$ composer require encjacom/ipresso_api
 ```
 ## Examples
 
