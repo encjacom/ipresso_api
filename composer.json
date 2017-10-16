@@ -1,6 +1,6 @@
 {
-  "name": "michalper/ipresso_api",
-  "description": "Unofficial PHP library for iPresso API",
+  "name": "encjacom/ipresso_api",
+  "description": "Official PHP library for iPresso REST API",
   "homepage": "http://apidoc.ipresso.pl/",
   "license": "GPL-2.0",
   "authors": [
@@ -8,7 +8,7 @@
       "name": "Michał Per",
       "email": "michal.per@encja.com",
       "homepage": "https://github.com/michalper",
-      "role": "PHP Developer"
+      "role": "Head Integration Developer"
     }
   ],
   "support": {
