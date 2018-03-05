@@ -191,7 +191,8 @@ class iPresso
     }
 
     /**
-     * @return bool|string
+     * @return bool|\iPresso\Service\Response
+     * @throws Exception
      */
     public function getToken()
     {

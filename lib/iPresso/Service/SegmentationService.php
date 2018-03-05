@@ -35,6 +35,7 @@ class SegmentationService implements ServiceInterface
     /**
      * @param Segmentation $segmentation
      * @return bool|Response
+     * @throws \Exception
      */
     public function add(Segmentation $segmentation)
     {
@@ -49,6 +50,7 @@ class SegmentationService implements ServiceInterface
     /**
      * @param integer $idSegmentation
      * @return bool|Response
+     * @throws \Exception
      */
     public function delete($idSegmentation)
     {

@@ -42,7 +42,7 @@ class ContactActivity
 
     /**
      * @param string $key
-     * @param string $value
+     * @param mixed $value
      * @return ContactActivity
      */
     public function addParameter($key, $value)

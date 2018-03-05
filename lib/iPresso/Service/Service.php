@@ -244,6 +244,7 @@ class Service
 
     /**
      * @return bool|Response
+     * @throws \Exception
      */
     public function request()
     {
@@ -293,7 +294,7 @@ class Service
     /**
      * Use to get session token
      * @param bool $fullResponse
-     * @return bool|Response
+     * @return bool|Response|string
      * @throws \Exception
      */
     public function getToken($fullResponse = false)
