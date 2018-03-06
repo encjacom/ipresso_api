@@ -479,4 +479,18 @@ class ContactService implements ServiceInterface
             ->setPostData($data)
             ->request();
     }
+
+    /**
+     * @param integer $idContact
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function getProfilePage($idContact)
+    {
+        return $this
+            ->service
+            ->setRequestPath('contact/' . $idContact . '/profilepage')
+            ->setRequestType(Service::REQUEST_METHOD_GET)
+            ->request();
+    }
 }
