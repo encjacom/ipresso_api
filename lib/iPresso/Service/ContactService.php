@@ -493,4 +493,18 @@ class ContactService implements ServiceInterface
             ->setRequestType(Service::REQUEST_METHOD_GET)
             ->request();
     }
+
+    /**
+     * Get connections between contacts
+     * @param integer $idContact
+     * @return bool|Response
+     */
+    public function getConnectionExtended($idContact)
+    {
+        return $this
+            ->service
+            ->setRequestPath('contact/' . $idContact . '/connection/extended')
+            ->setRequestType(Service::REQUEST_METHOD_GET)
+            ->request();
+    }
 }
