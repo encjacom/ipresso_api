@@ -37,17 +37,27 @@ class CampaignService implements ServiceInterface
      * @param integer $idCampaign
      * @param Campaign $campaign
      * @param bool $key
+     * @param bool $noContact
      * @return bool|Response
      * @throws \Exception
      */
-    public function send($idCampaign, Campaign $campaign, $key = false)
+    public function send($idCampaign, Campaign $campaign, $key = false, $noContact = false)
     {
+        $getParam = '';
         if ($key)
-            $key = '?key=1';
+            $getParam = '?key=1';
+
+        if ($noContact) {
+            if ($getParam === '') {
+                $getParam .= '?nocontact=1';
+            } else {
+                $getParam .= '&nocontact=1';
+            }
+        }
 
         return $this
             ->service
-            ->setRequestPath('campaign/' . $idCampaign . '/send' . $key)
+            ->setRequestPath('campaign/' . $idCampaign . '/send' . $getParam)
             ->setRequestType(Service::REQUEST_METHOD_POST)
             ->setPostData($campaign->getCampaign())
             ->request();
