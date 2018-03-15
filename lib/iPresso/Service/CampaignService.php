@@ -43,21 +43,20 @@ class CampaignService implements ServiceInterface
      */
     public function send($idCampaign, Campaign $campaign, $key = false, $noContact = false)
     {
-        $getParam = '';
+        /** Przygotowanie parametrów GET */
+        $getParam = [];
         if ($key)
-            $getParam = '?key=1';
+            $getParam['key'] = 1;
 
         if ($noContact) {
-            if ($getParam === '') {
-                $getParam .= '?nocontact=1';
-            } else {
-                $getParam .= '&nocontact=1';
-            }
+            $getParam['nocontact'] = 1;
         }
+
+        $queryStr = http_build_query($getParam);
 
         return $this
             ->service
-            ->setRequestPath('campaign/' . $idCampaign . '/send' . $getParam)
+            ->setRequestPath('campaign/' . $idCampaign . '/send?' . $queryStr)
             ->setRequestType(Service::REQUEST_METHOD_POST)
             ->setPostData($campaign->getCampaign())
             ->request();
