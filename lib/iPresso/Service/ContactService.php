@@ -91,6 +91,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#delete-contact
      * @param $id_contact
      * @return bool|Response
+     * @throws \Exception
      */
     public function delete($id_contact)
     {
