@@ -33,6 +33,19 @@ class SegmentationService implements ServiceInterface
     }
 
     /**
+     * @return Response
+     * @throws \Exception
+     */
+    public function getList()
+    {
+        return $this
+            ->service
+            ->setRequestPath('segmentation')
+            ->setRequestType(Service::REQUEST_METHOD_GET)
+            ->request();
+    }
+
+    /**
      * @param Segmentation $segmentation
      * @return bool|Response
      * @throws \Exception
@@ -69,7 +82,7 @@ class SegmentationService implements ServiceInterface
      */
     public function addContact($idSegmentation, Segmentation $segmentation)
     {
-        if(!is_numeric($idSegmentation))
+        if (!is_numeric($idSegmentation))
             throw new \Exception('Wrong segmentation id.');
 
         return $this
@@ -77,6 +90,23 @@ class SegmentationService implements ServiceInterface
             ->setRequestPath('segmentation/' . $idSegmentation . '/contact')
             ->setRequestType(Service::REQUEST_METHOD_POST)
             ->setPostData($segmentation->getSegmentationContact())
+            ->request();
+    }
+
+    /**
+     * @param integer $idSegmentation
+     * @return Response
+     * @throws \Exception
+     */
+    public function getContact($idSegmentation)
+    {
+        if (!is_numeric($idSegmentation))
+            throw new \Exception('Wrong segmentation id.');
+
+        return $this
+            ->service
+            ->setRequestPath('segmentation/' . $idSegmentation)
+            ->setRequestType(Service::REQUEST_METHOD_GET)
             ->request();
     }
 }
