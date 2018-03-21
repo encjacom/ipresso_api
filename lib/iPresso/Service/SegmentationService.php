@@ -36,7 +36,7 @@ class SegmentationService implements ServiceInterface
      * @return Response
      * @throws \Exception
      */
-    public function getList()
+    public function get()
     {
         return $this
             ->service
