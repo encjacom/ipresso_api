@@ -3,6 +3,7 @@
 namespace iPresso\Service;
 
 use iPresso\Model\Attribute;
+use iPresso\Model\AttributeOption;
 use Itav\Component\Serializer\Serializer;
 
 /**
@@ -51,6 +52,7 @@ class AttributeService implements ServiceInterface
     /**
      * Get available attributes
      * @return bool|Response
+     * @throws \Exception
      */
     public function get()
     {
@@ -65,6 +67,7 @@ class AttributeService implements ServiceInterface
      * Add new options to attribute
      * @param Attribute $attribute
      * @return bool|Response
+     * @throws \Exception
      */
     public function addOption(Attribute $attribute)
     {
@@ -73,6 +76,38 @@ class AttributeService implements ServiceInterface
             ->setRequestPath('attribute/' . $attribute->getKey() . '/option')
             ->setRequestType(Service::REQUEST_METHOD_POST)
             ->setPostData($attribute->getAttribute(true))
+            ->request();
+    }
+
+    /**
+     * Edit attribute option
+     * @param string $attributeKey
+     * @param AttributeOption $option
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function editOption($attributeKey, AttributeOption $option)
+    {
+        return $this
+            ->service
+            ->setRequestPath('attribute/' . $attributeKey . '/option/' . $option->getKey())
+            ->setRequestType(Service::REQUEST_METHOD_PUT)
+            ->setPostData(['option' => $this->serializer->normalize($option->getOption())])
+            ->request();
+    }
+
+    /**
+     * @param $attributeKey
+     * @param AttributeOption $option
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function deleteOption($attributeKey, AttributeOption $option)
+    {
+        return $this
+            ->service
+            ->setRequestPath('attribute/' . $attributeKey . '/option/' . $option->getKey())
+            ->setRequestType(Service::REQUEST_METHOD_DELETE)
             ->request();
     }
 }

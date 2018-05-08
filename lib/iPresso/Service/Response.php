@@ -237,7 +237,7 @@ class Response
             62 => 'Agreement deletion error',
             63 => 'Contact has integration',
             64 => 'Attribute with given key already exists',
-            65 => 'Incorrect type of added attribute',
+            65 => 'Incorrect type of attribute',
             66 => 'Lack of URL address monitored website',
             67 => 'Incorrect URL address monitored website',
             68 => 'Monitored website addition error',
