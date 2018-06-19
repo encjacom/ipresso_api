@@ -722,6 +722,9 @@ class Contact
         if (!empty($this->flat_number))
             $contact[self::VAR_FLAT_NUMBER] = $this->flat_number;
 
+        if (!empty($this->building_number))
+            $contact[self::VAR_BUILDING_NUMBER] = $this->building_number;
+
         if (!empty($this->region))
             $contact[self::REGION] = $this->region;
 
