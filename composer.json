@@ -20,7 +20,8 @@
   ],
   "require": {
     "php": ">=5.3",
-    "itav/serializer": "^1.3"
+    "itav/serializer": "^1.3",
+    "phpunit/phpunit": "^6.5"
   },
   "require-dev": {
   },
@@ -33,6 +34,11 @@
       "iPresso\\": "iPresso/",
       "iPresso\\Model\\": "iPresso/Model/",
       "iPresso\\Service\\": "iPresso/Service/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.0"
     }
   }
 }
