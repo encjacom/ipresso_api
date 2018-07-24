@@ -2,6 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class AgreementTest
+ */
 class AgreementTest extends TestCase
 {
     public static $config = [
@@ -142,25 +145,97 @@ class AgreementTest extends TestCase
     /**
      * @depends testAgreementAdd
      * @depends testContactAdd
-     * @param $idAgreement
-     * @param $idContact
+     * @param int $idAgreement
+     * @param int $idContact
+     * @throws Exception
      */
-    public function testAddContactToAgreements(int $idAgreement, int $idContact)
+    public function testAddContactToAgreement(int $idAgreement, int $idContact)
     {
         $this->assertGreaterThan(0, $idAgreement);
         $this->assertGreaterThan(0, $idContact);
 
-        /**
-         * @TODO
-         */
+        $response = $this->class->agreement->addContact($idAgreement, [$idContact]);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_CREATED]);
     }
 
+    /**
+     * @depends testAgreementAdd
+     * @depends testContactAdd
+     * @depends testAddContactToAgreement
+     * @param int $idAgreement
+     * @param int $idContact
+     * @throws Exception
+     */
+    public function testGetContactAgreement(int $idAgreement, int $idContact)
+    {
+        $this->assertGreaterThan(0, $idAgreement);
+        $this->assertGreaterThan(0, $idContact);
+
+        $response = $this->class->agreement->getContact($idAgreement);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+
+        $this->assertObjectHasAttribute('id', $response->getData());
+
+        $this->assertContains($idContact, $response->getData()->id);
+    }
 
     /**
-     * @param $idAgreement
-     * @depends testAgreementEdit
+     * @depends testAgreementAdd
+     * @depends testContactAdd
+     * @depends testAddContactToAgreement
+     * @param int $idAgreement
+     * @param int $idContact
      */
-    public function testAgreementDelete($idAgreement)
+    public function testDeleteContactAgreement(int $idAgreement, int $idContact)
+    {
+        $this->assertGreaterThan(0, $idAgreement);
+        $this->assertGreaterThan(0, $idContact);
+
+        $response = $this->class->agreement->deleteContact($idAgreement, $idContact);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+    }
+
+    /**
+     * @depends testAgreementAdd
+     * @depends testContactAdd
+     * @depends testDeleteContactAgreement
+     * @param int $idAgreement
+     * @param int $idContact
+     */
+    public function testCheckContactHasAgreementAfterDelete(int $idAgreement, int $idContact)
+    {
+        $this->assertGreaterThan(0, $idAgreement);
+        $this->assertGreaterThan(0, $idContact);
+
+        $response = $this->class->agreement->getContact($idAgreement);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+
+        $this->assertObjectHasAttribute('count', $response->getData());
+
+        if ($response->getData->count > 0) {
+            $this->assertObjectHasAttribute('id', $response->getData());
+
+            $this->assertNotContains($idContact, $response->getData()->id);
+        }
+    }
+
+    /**
+     * @depends testAgreementAdd
+     * @param int $idAgreement
+     */
+    public function testAgreementDelete(int $idAgreement)
     {
         $this->assertGreaterThan(0, $idAgreement);
 
@@ -170,6 +245,4 @@ class AgreementTest extends TestCase
 
         $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
     }
-
-
 }
