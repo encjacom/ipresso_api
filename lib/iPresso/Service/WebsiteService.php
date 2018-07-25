@@ -33,8 +33,9 @@ class WebsiteService implements ServiceInterface
 
     /**
      * Get monitored websites
-     * @param integer|bool $idWww
+     * @param bool|integer $idWww
      * @return bool|Response
+     * @throws \Exception
      */
     public function get($idWww = false)
     {
@@ -73,6 +74,7 @@ class WebsiteService implements ServiceInterface
      * Delete monitored website
      * @param integer $idWww
      * @return bool|Response
+     * @throws \Exception
      */
     public function delete($idWww)
     {
