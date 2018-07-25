@@ -2,11 +2,18 @@
 
 namespace iPresso\Model;
 
+/**
+ * Class Tag
+ * @package iPresso\Model
+ */
 class Tag
 {
     const VAR_NAME = 'name';
     const VAR_PARENT_ID = 'parentId';
 
+    /**
+     * @var array
+     */
     public $tag = [];
 
     /**
@@ -32,7 +39,7 @@ class Tag
 
     /**
      * @param string $name
-     * @return Category
+     * @return Tag
      */
     public function setName($name)
     {
@@ -50,7 +57,7 @@ class Tag
 
     /**
      * @param int $parent_id
-     * @return Category
+     * @return Tag
      */
     public function setParentId($parent_id)
     {
