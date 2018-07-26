@@ -266,4 +266,77 @@ class TagTest extends TestCase
 
         $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
     }
+
+    /**
+     * @depends testContactAdd
+     * @param int $idContact
+     * @return string
+     * @throws Exception
+     */
+    public function testContactAddTag(int $idContact)
+    {
+        $tag = 'Unit tests';
+
+        $this->assertGreaterThan(0, $idContact);
+
+        $response = $this->class->contact->addTag($idContact, $tag);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_CREATED]);
+
+        return $tag;
+    }
+
+    /**
+     * @depends testContactAdd
+     * @depends testContactAddTag
+     * @param int $idContact
+     * @param string $tag
+     * @return integer
+     * @throws Exception
+     */
+    public function testContactGetTag(int $idContact, string $tag)
+    {
+        $this->assertGreaterThan(0, $idContact);
+
+        $response = $this->class->contact->getTag($idContact);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+
+        $this->assertObjectHasAttribute('tag', $response->getData());
+
+        $idTag = array_search($tag, (array)$response->getData()->tag);
+
+        $this->assertGreaterThan(0, $idTag);
+
+        return $idTag;
+    }
+
+    /**
+     * @depends testContactAdd
+     * @depends testContactGetTag
+     * @param int $idContact
+     * @param int $idTag
+     * @throws Exception
+     */
+    public function testContactDeleteTag(int $idContact, int $idTag)
+    {
+        $this->assertGreaterThan(0, $idContact);
+        $this->assertGreaterThan(0, $idTag);
+
+        $response = $this->class->contact->deleteTag($idContact, $idTag);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+
+        $response = $this->class->tag->delete($idTag);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+    }
 }

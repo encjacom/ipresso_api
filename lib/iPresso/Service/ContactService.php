@@ -39,7 +39,7 @@ class ContactService implements ServiceInterface
     /**
      * Adding new contact
      * @see http://apidoc.ipresso.pl/v2/en/#adding-new-contact
-     * @param Contact|array $contact
+     * @param Contact|Contact[] $contact
      * @return bool|Response
      * @throws \Exception
      */
