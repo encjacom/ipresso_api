@@ -17,6 +17,13 @@ class ServiceTest extends TestCase
      */
     private $class;
 
+    /**
+     * ServiceTest constructor.
+     * @param string|null $name
+     * @param array $data
+     * @param string $dataName
+     * @throws Exception
+     */
     public function __construct(string $name = null, array $data = [], string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);

@@ -65,17 +65,18 @@ class AttributeService implements ServiceInterface
 
     /**
      * Add new options to attribute
-     * @param Attribute $attribute
+     * @param string $attributeKey
+     * @param AttributeOption $option
      * @return bool|Response
      * @throws \Exception
      */
-    public function addOption(Attribute $attribute)
+    public function addOption($attributeKey, AttributeOption $option)
     {
         return $this
             ->service
-            ->setRequestPath('attribute/' . $attribute->getKey() . '/option')
+            ->setRequestPath('attribute/' . $attributeKey . '/option')
             ->setRequestType(Service::REQUEST_METHOD_POST)
-            ->setPostData($attribute->getAttribute(true))
+            ->setPostData(['option' => [$option->getKey() => $option->getValue()]])
             ->request();
     }
 

@@ -93,6 +93,7 @@ class CategoryTest extends TestCase
      * @depends testCategoryAdd
      * @param int $idCategory
      * @return int
+     * @throws Exception
      */
     public function testCategoryGet(int $idCategory)
     {
@@ -208,6 +209,7 @@ class CategoryTest extends TestCase
      * @depends testAddContactToCategory
      * @param int $idCategory
      * @param int $idContact
+     * @throws Exception
      */
     public function testDeleteContactCategory(int $idCategory, int $idContact)
     {
@@ -227,6 +229,7 @@ class CategoryTest extends TestCase
      * @depends testDeleteContactCategory
      * @param int $idCategory
      * @param int $idContact
+     * @throws Exception
      */
     public function testCheckContactHasCategoryAfterDelete(int $idCategory, int $idContact)
     {
@@ -251,6 +254,7 @@ class CategoryTest extends TestCase
     /**
      * @depends testCategoryAdd
      * @param int $idCategory
+     * @throws Exception
      */
     public function testCategoryDelete(int $idCategory)
     {

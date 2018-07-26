@@ -93,6 +93,7 @@ class TagTest extends TestCase
      * @depends testTagAdd
      * @param int $idTag
      * @return int
+     * @throws Exception
      */
     public function testTagGet(int $idTag)
     {
@@ -208,6 +209,7 @@ class TagTest extends TestCase
      * @depends testAddContactToTag
      * @param int $idTag
      * @param int $idContact
+     * @throws Exception
      */
     public function testDeleteContactTag(int $idTag, int $idContact)
     {
@@ -227,6 +229,7 @@ class TagTest extends TestCase
      * @depends testDeleteContactTag
      * @param int $idTag
      * @param int $idContact
+     * @throws Exception
      */
     public function testCheckContactHasTagAfterDelete(int $idTag, int $idContact)
     {
@@ -251,6 +254,7 @@ class TagTest extends TestCase
     /**
      * @depends testTagAdd
      * @param int $idTag
+     * @throws Exception
      */
     public function testTagDelete(int $idTag)
     {

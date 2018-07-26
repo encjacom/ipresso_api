@@ -46,6 +46,7 @@ class AgreementTest extends TestCase
     /**
      * @depends testAgreementClass
      * @see http://apidoc.ipresso.pl/v2/en/#get-all-available-agreements
+     * @throws Exception
      */
     public function testAgreementGetAll()
     {
@@ -191,6 +192,7 @@ class AgreementTest extends TestCase
      * @depends testAddContactToAgreement
      * @param int $idAgreement
      * @param int $idContact
+     * @throws Exception
      */
     public function testDeleteContactAgreement(int $idAgreement, int $idContact)
     {
@@ -210,6 +212,7 @@ class AgreementTest extends TestCase
      * @depends testDeleteContactAgreement
      * @param int $idAgreement
      * @param int $idContact
+     * @throws Exception
      */
     public function testCheckContactHasAgreementAfterDelete(int $idAgreement, int $idContact)
     {
@@ -234,6 +237,7 @@ class AgreementTest extends TestCase
     /**
      * @depends testAgreementAdd
      * @param int $idAgreement
+     * @throws Exception
      */
     public function testAgreementDelete(int $idAgreement)
     {
