@@ -36,6 +36,7 @@ class TagService implements ServiceInterface
      * Get tags
      * @param integer|bool $idTag
      * @return bool|Response
+     * @throws \Exception
      */
     public function get($idTag = false)
     {
@@ -87,6 +88,7 @@ class TagService implements ServiceInterface
      * Delete tag
      * @param integer $idTag
      * @return bool|Response
+     * @throws \Exception
      */
     public function delete($idTag)
     {
@@ -123,6 +125,7 @@ class TagService implements ServiceInterface
      * @param integer $idTag
      * @param integer|bool $page
      * @return bool|Response
+     * @throws \Exception
      */
     public function getContact($idTag, $page = false)
     {
@@ -141,6 +144,7 @@ class TagService implements ServiceInterface
      * @param integer $idTag
      * @param integer $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function deleteContact($idTag, $idContact)
     {

@@ -35,6 +35,7 @@ class TypeService implements ServiceInterface
     /**
      * Get all contact types with their dynamic and static attributes
      * @return bool|Response
+     * @throws \Exception
      */
     public function get()
     {
@@ -66,6 +67,7 @@ class TypeService implements ServiceInterface
      * @param integer $idType
      * @param bool $page
      * @return bool|Response
+     * @throws \Exception
      */
     public function getContact($idType, $page = false)
     {

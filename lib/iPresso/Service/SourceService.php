@@ -34,6 +34,7 @@ class SourceService implements ServiceInterface
     /**
      * Get all contact sources
      * @return bool|Response
+     * @throws \Exception
      */
     public function get()
     {
@@ -49,6 +50,7 @@ class SourceService implements ServiceInterface
      * @param integer $idSource
      * @param integer|bool $page
      * @return bool|Response
+     * @throws \Exception
      */
     public function getContact($idSource, $page = false)
     {

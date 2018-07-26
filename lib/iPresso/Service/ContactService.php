@@ -107,6 +107,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#collect-contact-39-s-data-with-a-given-id-number
      * @param integer $id_contact
      * @return bool|Response
+     * @throws \Exception
      */
     public function get($id_contact)
     {
@@ -123,6 +124,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param string $tagString
      * @return bool|Response
+     * @throws \Exception
      */
     public function addTag($idContact, $tagString)
     {
@@ -140,6 +142,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#collecting-tags-for-a-contact
      * @param integer $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function getTag($idContact)
     {
@@ -156,6 +159,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param integer $idTag
      * @return bool|Response
+     * @throws \Exception
      */
     public function deleteTag($idContact, $idTag)
     {
@@ -172,6 +176,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param array $categoryIds
      * @return bool|Response
+     * @throws \Exception
      */
     public function addCategory($idContact, $categoryIds)
     {
@@ -189,6 +194,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#get-category-for-a-contact
      * @param integer $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function getCategory($idContact)
     {
@@ -205,6 +211,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param integer $idCategory
      * @return bool|Response
+     * @throws \Exception
      */
     public function deleteCategory($idContact, $idCategory)
     {
@@ -220,6 +227,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#get-integration-of-the-contact
      * @param integer $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function getIntegration($idContact)
     {
@@ -239,6 +247,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param array $agreement [ID_AGREEMENT => ID_AGREEMENT_STATUS]
      * @return bool|Response
+     * @throws \Exception
      */
     public function addAgreement($idContact, $agreement)
     {
@@ -256,6 +265,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#get-contact-39-s-agreements
      * @param integer $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function getAgreement($idContact)
     {
@@ -272,6 +282,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param integer $idAgreement
      * @return bool|Response
+     * @throws \Exception
      */
     public function deleteAgreement($idContact, $idAgreement)
     {
@@ -307,6 +318,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param ContactActivity[] $contactActivities
      * @return bool|Response
+     * @throws \Exception
      */
     public function addActivities($idContact, $contactActivities)
     {
@@ -330,6 +342,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param integer|bool $page
      * @return bool|Response
+     * @throws \Exception
      */
     public function getActivity($idContact, $page = false)
     {
@@ -368,6 +381,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param integer|bool $page
      * @return bool|Response
+     * @throws \Exception
      */
     public function getAction($idContact, $page = false)
     {
@@ -386,6 +400,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#get-contact-types
      * @param integer $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function getType($idContact)
     {
@@ -402,6 +417,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param string $typeKey
      * @return bool|Response
+     * @throws \Exception
      */
     public function setType($idContact, $typeKey)
     {
@@ -419,6 +435,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#get-connections-between-contacts
      * @param integer $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function getConnection($idContact)
     {
@@ -435,6 +452,7 @@ class ContactService implements ServiceInterface
      * @param integer $idContact
      * @param integer $idContactToConnect
      * @return bool|Response
+     * @throws \Exception
      */
     public function setConnection($idContact, $idContactToConnect)
     {
@@ -452,6 +470,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#mass-addition-of-activities-to-contacts
      * @param MassContactActivity $massContactActivity
      * @return bool|Response
+     * @throws \Exception
      */
     public function addMassActivity(MassContactActivity $massContactActivity)
     {
@@ -469,6 +488,7 @@ class ContactService implements ServiceInterface
      * @see http://apidoc.ipresso.pl/v2/en/#mass-addition-of-actions-to-contacts
      * @param MassContactAction $massContactAction
      * @return bool|Response
+     * @throws \Exception
      */
     public function addMassAction(MassContactAction $massContactAction)
     {
@@ -499,6 +519,7 @@ class ContactService implements ServiceInterface
      * Get connections between contacts
      * @param integer $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function getConnectionExtended($idContact)
     {

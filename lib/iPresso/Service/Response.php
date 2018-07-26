@@ -264,6 +264,12 @@ class Response
             97 => 'Voucher does not exists',
             98 => 'Contacts does not have web push token',
             99 => 'Scenario key not exists',
+            100 => 'Campaign vendor missing',
+            101 => 'Profile page missing',
+            102 => 'Attribute wrong data',
+            103 => 'Attribute option wrong data',
+            104 => 'Attribute option exists',
+            105 => 'Category exists',
         ];
 
         if (isset($error_codes[$code])) {
