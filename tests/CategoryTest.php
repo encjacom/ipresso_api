@@ -252,6 +252,72 @@ class CategoryTest extends TestCase
     }
 
     /**
+     * @depends testContactAdd
+     * @depends testCategoryAdd
+     * @param int $idContact
+     * @param int $idCategory
+     * @return integer
+     * @throws Exception
+     */
+    public function testContactAddCategory(int $idContact, int $idCategory)
+    {
+        $this->assertGreaterThan(0, $idContact);
+        $this->assertGreaterThan(0, $idCategory);
+
+        $response = $this->class->contact->addCategory($idContact, [$idCategory]);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_CREATED]);
+
+        return $idCategory;
+    }
+
+    /**
+     * @depends testContactAdd
+     * @depends testContactAddCategory
+     * @param int $idContact
+     * @param int $idCategory
+     * @return integer
+     * @throws Exception
+     */
+    public function testContactGetCategory(int $idContact, int $idCategory)
+    {
+        $this->assertGreaterThan(0, $idContact);
+
+        $response = $this->class->contact->getCategory($idContact);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+
+        $this->assertObjectHasAttribute('category', $response->getData());
+
+        $this->assertNotEmpty($response->getData()->category->$idCategory);
+
+        return $idCategory;
+    }
+
+    /**
+     * @depends testContactAdd
+     * @depends testContactGetCategory
+     * @param int $idContact
+     * @param int $idCategory
+     * @throws Exception
+     */
+    public function testContactDeleteTag(int $idContact, int $idCategory)
+    {
+        $this->assertGreaterThan(0, $idContact);
+        $this->assertGreaterThan(0, $idCategory);
+
+        $response = $this->class->contact->deleteCategory($idContact, $idCategory);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+    }
+
+    /**
      * @depends testCategoryAdd
      * @param int $idCategory
      * @throws Exception
