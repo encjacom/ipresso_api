@@ -153,7 +153,7 @@ class TagTest extends TestCase
 
         $contact = reset($response->getData()->contact);
 
-        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_OK, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
+        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_CREATED, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
 
         $this->assertGreaterThan(0, $contact->id);
 

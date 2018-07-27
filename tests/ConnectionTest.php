@@ -3,9 +3,9 @@
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class TypeTest
+ * Class ConnectionTest
  */
-class TypeTest extends TestCase
+class ConnectionTest extends TestCase
 {
     public static $config = [
         'url' => 'https://panel.local-ipresso.encja.eu',
@@ -21,7 +21,7 @@ class TypeTest extends TestCase
     private $class;
 
     /**
-     * TypeTest constructor.
+     * ConnectionTest constructor.
      * @param string|null $name
      * @param array $data
      * @param string $dataName
@@ -38,45 +38,38 @@ class TypeTest extends TestCase
             ->setUrl(self::$config['url']);
     }
 
-    public function testTypeClass()
-    {
-        $this->assertInstanceOf(\iPresso\Service\TypeService::class, $this->class->type);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testTypeAddWrong()
-    {
-        $type = new \iPresso\Model\Type();
-
-        $this->expectException(Exception::class);
-        $type->getType();
-    }
-
-    /**
-     * @depends testTypeClass
-     */
-    public function testTypeGetAll()
-    {
-        $response = $this->class->type->get();
-
-        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
-
-        $this->assertEquals(\iPresso\Service\Response::STATUS_OK, $response->getCode());
-
-        $this->assertObjectHasAttribute('type', $response->getData());
-    }
-
     /**
      * @return string
      * @throws Exception
      */
-    public function testTypeAdd()
+    public function testTypeAddParent()
     {
         $type = new \iPresso\Model\Type();
-        $type->setName('Unit tests');
-        $type->setKey('unit_tests');
+        $type->setName('Unit tests - Parent');
+        $type->setKey('unit_tests_parent');
+        $response = $this->class->type->add($type);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_CREATED, \iPresso\Service\Response::STATUS_FOUND]);
+
+        $this->assertObjectHasAttribute('type', $response->getData());
+
+        return (string)$response->getData()->type->key;
+    }
+
+    /**
+     * @depends testTypeAddParent
+     * @param string $contactTypeParent
+     * @return string
+     * @throws Exception
+     */
+    public function testTypeAddChild(string $contactTypeParent)
+    {
+        $type = new \iPresso\Model\Type();
+        $type->setName('Unit tests - Child');
+        $type->setKey('unit_tests_child');
+        $type->setParent($contactTypeParent);
         $response = $this->class->type->add($type);
 
         $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
@@ -90,13 +83,16 @@ class TypeTest extends TestCase
 
 
     /**
+     * @depends testTypeAddParent
+     * @param string $contactType
      * @return integer
      * @throws Exception
      */
-    public function testContactAdd()
+    public function testContactAddParent(string $contactType)
     {
         $contact = new \iPresso\Model\Contact();
-        $contact->setEmail('michal.per+test@encja.com');
+        $contact->setEmail('michal.per+parent@encja.com');
+        $contact->setType($contactType);
 
         $response = $this->class->contact->add($contact);
 
@@ -116,18 +112,47 @@ class TypeTest extends TestCase
     }
 
     /**
-     * @depends testTypeAdd
-     * @depends testContactAdd
-     * @param string $typeKey
-     * @param int $idContact
+     * @depends testTypeAddChild
+     * @param string $contactType
+     * @return integer
      * @throws Exception
      */
-    public function testAddContactToType(string $typeKey, int $idContact)
+    public function testContactAddChild(string $contactType)
     {
-        $this->assertNotEmpty($typeKey);
-        $this->assertGreaterThan(0, $idContact);
+        $contact = new \iPresso\Model\Contact();
+        $contact->setEmail('michal.per+child@encja.com');
+        $contact->setType($contactType);
 
-        $response = $this->class->type->addContact($typeKey, [$idContact]);
+        $response = $this->class->contact->add($contact);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+
+        $this->assertObjectHasAttribute('contact', $response->getData());
+
+        $contact = reset($response->getData()->contact);
+
+        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_CREATED, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
+
+        $this->assertGreaterThan(0, $contact->id);
+
+        return (integer)$contact->id;
+    }
+
+    /**
+     * @depends testContactAddParent
+     * @depends testContactAddChild
+     * @param int $idContactParent
+     * @param int $idContactChild
+     * @throws Exception
+     */
+    public function testContactSetConnection(int $idContactParent, int $idContactChild)
+    {
+        $this->assertGreaterThan(0, $idContactParent);
+        $this->assertGreaterThan(0, $idContactChild);
+
+        $response = $this->class->contact->setConnection($idContactParent, $idContactChild);
 
         $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
 
@@ -135,25 +160,30 @@ class TypeTest extends TestCase
     }
 
     /**
-     * @depends testTypeAdd
-     * @depends testContactAdd
-     * @param string $typeKey
-     * @param int $idContact
+     * @depends testContactAddParent
+     * @depends testContactSetConnection
+     * @param int $idContactParent
      * @throws Exception
      */
-    public function testGetContactInType(string $typeKey, int $idContact)
+    public function testContactGetConnection(int $idContactParent)
     {
-        $this->assertNotEmpty($typeKey);
-        $this->assertGreaterThan(0, $idContact);
+        $this->assertGreaterThan(0, $idContactParent);
 
-        $response = $this->class->type->getContact($typeKey);
+        $response = $this->class->contact->getConnection($idContactParent);
+
+
+        /**
+         * @TODO
+         */
+        print_r($response);
+        die();
 
         $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
 
         $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
 
-        $this->assertObjectHasAttribute('id', $response->getData());
-
-        $this->assertContains($idContact, $response->getData()->id);
+        $this->assertObjectHasAttribute('connection', $response->getData());
     }
+
+
 }

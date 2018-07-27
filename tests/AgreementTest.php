@@ -136,7 +136,7 @@ class AgreementTest extends TestCase
 
         $contact = reset($response->getData()->contact);
 
-        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_OK, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
+        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_CREATED, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
 
         $this->assertGreaterThan(0, $contact->id);
 
@@ -233,6 +233,74 @@ class AgreementTest extends TestCase
             $this->assertNotContains($idContact, $response->getData()->id);
         }
     }
+
+
+    /**
+     * @depends testContactAdd
+     * @depends testAgreementAdd
+     * @param int $idContact
+     * @param int $idAgreement
+     * @return integer
+     * @throws Exception
+     */
+    public function testContactAddAgreement(int $idContact, int $idAgreement)
+    {
+        $this->assertGreaterThan(0, $idContact);
+        $this->assertGreaterThan(0, $idAgreement);
+
+        $response = $this->class->contact->addAgreement($idContact, [$idAgreement => \iPresso\Model\Agreement::DIRECT_MARKETING_VISIBLE]);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_CREATED]);
+
+        return $idAgreement;
+    }
+
+    /**
+     * @depends testContactAdd
+     * @depends testContactAddAgreement
+     * @param int $idContact
+     * @param int $idAgreement
+     * @return integer
+     * @throws Exception
+     */
+    public function testContactGetAgreement(int $idContact, int $idAgreement)
+    {
+        $this->assertGreaterThan(0, $idContact);
+
+        $response = $this->class->contact->getAgreement($idContact);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+
+        $this->assertObjectHasAttribute('agreement', $response->getData());
+
+        $this->assertNotEmpty($response->getData()->agreement->agreements->$idAgreement);
+
+        return $idAgreement;
+    }
+
+    /**
+     * @depends testContactAdd
+     * @depends testContactGetAgreement
+     * @param int $idContact
+     * @param int $idAgreement
+     * @throws Exception
+     */
+    public function testContactDeleteAgreement(int $idContact, int $idAgreement)
+    {
+        $this->assertGreaterThan(0, $idContact);
+        $this->assertGreaterThan(0, $idAgreement);
+
+        $response = $this->class->contact->deleteAgreement($idContact, $idAgreement);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+    }
+
 
     /**
      * @depends testAgreementAdd

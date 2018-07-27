@@ -2,16 +2,41 @@
 
 namespace iPresso\Model;
 
+/**
+ * Class Type
+ * @package iPresso\Model
+ */
 class Type
 {
     const VAR_ATTRIBUTE = 'attribute';
     const VAR_KEY = 'key';
     const VAR_NAME = 'name';
+    const VAR_PARENT = 'parent';
 
+    /**
+     * @var array
+     */
     public $type;
+
+    /**
+     * @var array
+     */
     private $attribute = [];
+
+    /**
+     * @var string
+     */
     private $key;
+
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * @var string
+     */
+    private $parent;
 
     /**
      * @param string $name
@@ -43,9 +68,31 @@ class Type
         return $this;
     }
 
+    /**
+     * @param string $attribute_key
+     * @return Type
+     */
     public function addAttribute($attribute_key)
     {
         $this->attribute[] = $attribute_key;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param string $parent
+     * @return Type
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
         return $this;
     }
 
@@ -67,6 +114,9 @@ class Type
 
         if (!empty($this->attribute))
             $this->type[self::VAR_ATTRIBUTE] = $this->attribute;
+
+        if (!empty($this->parent))
+            $this->type[self::VAR_PARENT] = $this->parent;
 
         return $this->type;
     }

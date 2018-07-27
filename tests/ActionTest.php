@@ -130,7 +130,7 @@ class ActionTest extends TestCase
 
         $contact = reset($response->getData()->contact);
 
-        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_OK, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
+        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_CREATED, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
 
         $this->assertGreaterThan(0, $contact->id);
 
@@ -154,6 +154,31 @@ class ActionTest extends TestCase
         $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
 
         $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_CREATED]);
+    }
+
+    /**
+     * @depends testContactAdd
+     * @depends testActionAdd
+     * @param int $idContact
+     * @param string $actionKey
+     * @return integer
+     * @throws Exception
+     */
+    public function testContactAddAction(int $idContact, string $actionKey)
+    {
+        $this->assertGreaterThan(0, $idContact);
+        $this->assertNotEmpty($actionKey);
+
+        $action = new \iPresso\Model\ContactAction();
+        $action->setKey($actionKey);
+
+        $response = $this->class->contact->addAction($idContact, $action);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_CREATED]);
+
+        return $actionKey;
     }
 
     /**

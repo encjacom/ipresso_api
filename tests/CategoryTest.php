@@ -48,10 +48,10 @@ class CategoryTest extends TestCase
      */
     public function testCategoryAddWrong()
     {
-        $tag = new \iPresso\Model\Category();
+        $category = new \iPresso\Model\Category();
 
         $this->expectException(Exception::class);
-        $tag->getCategory();
+        $category->getCategory();
     }
 
     /**
@@ -153,7 +153,7 @@ class CategoryTest extends TestCase
 
         $contact = reset($response->getData()->contact);
 
-        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_OK, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
+        $this->assertContains($contact->code, [\iPresso\Service\Response::STATUS_CREATED, \iPresso\Service\Response::STATUS_FOUND, \iPresso\Service\Response::STATUS_SEE_OTHER]);
 
         $this->assertGreaterThan(0, $contact->id);
 
@@ -305,7 +305,7 @@ class CategoryTest extends TestCase
      * @param int $idCategory
      * @throws Exception
      */
-    public function testContactDeleteTag(int $idContact, int $idCategory)
+    public function testContactDeleteCategory(int $idContact, int $idCategory)
     {
         $this->assertGreaterThan(0, $idContact);
         $this->assertGreaterThan(0, $idCategory);
