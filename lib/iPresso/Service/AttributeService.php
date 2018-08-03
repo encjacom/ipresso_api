@@ -4,6 +4,7 @@ namespace iPresso\Service;
 
 use iPresso\Model\Attribute;
 use iPresso\Model\AttributeOption;
+use iPresso\Model\CustomerAttribute;
 use Itav\Component\Serializer\Serializer;
 
 /**
@@ -108,6 +109,65 @@ class AttributeService implements ServiceInterface
         return $this
             ->service
             ->setRequestPath('attribute/' . $attributeKey . '/option/' . $option->getKey())
+            ->setRequestType(Service::REQUEST_METHOD_DELETE)
+            ->request();
+    }
+
+    /**
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function getCustomerAttribute()
+    {
+        return $this
+            ->service
+            ->setRequestPath('attribute/customer')
+            ->setRequestType(Service::REQUEST_METHOD_GET)
+            ->request();
+    }
+
+    /**
+     * Add new customer attribute
+     * @param CustomerAttribute $customerAttribute
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function addCustomerAttribute(CustomerAttribute $customerAttribute)
+    {
+        return $this
+            ->service
+            ->setRequestPath('attribute/customer')
+            ->setRequestType(Service::REQUEST_METHOD_POST)
+            ->setPostData($this->serializer->normalize($customerAttribute))
+            ->request();
+    }
+
+    /**
+     * @param string $attributeKey
+     * @param CustomerAttribute $customerAttribute
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function editCustomerAttribute(string $attributeKey, CustomerAttribute $customerAttribute)
+    {
+        return $this
+            ->service
+            ->setRequestPath('attribute/customer/' . $attributeKey)
+            ->setRequestType(Service::REQUEST_METHOD_PUT)
+            ->setPostData(['attribute' => $this->serializer->normalize($customerAttribute)])
+            ->request();
+    }
+
+    /**
+     * @param string $attributeKey
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function deleteCustomerAttribute(string $attributeKey)
+    {
+        return $this
+            ->service
+            ->setRequestPath('attribute/customer/' . $attributeKey)
             ->setRequestType(Service::REQUEST_METHOD_DELETE)
             ->request();
     }
