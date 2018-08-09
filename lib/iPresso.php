@@ -167,7 +167,7 @@ class iPresso
 
     /**
      * @param string $url
-     * @return $this
+     * @return iPresso
      * @throws Exception
      */
     public function setUrl($url)
@@ -200,12 +200,22 @@ class iPresso
     }
 
     /**
-     * @param $header
+     * @param string $header
      * @return iPresso
      */
     public function addHeader($header)
     {
         $this->service->addCustomHeader($header);
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return iPresso
+     */
+    public function setExternalKey($key)
+    {
+        $this->service->addCustomHeader(Service::HEADER_EXTERNAL_KEY . $key);
         return $this;
     }
 

@@ -14,7 +14,7 @@ class Scenario
     private $contact;
 
     /**
-     * @param integer $idContact
+     * @param string $idContact
      * @return Scenario
      */
     public function addContact($idContact)

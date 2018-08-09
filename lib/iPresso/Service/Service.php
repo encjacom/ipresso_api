@@ -10,6 +10,8 @@ class Service
     const REQUEST_METHOD_PUT = 'PUT';
     const REQUEST_METHOD_DELETE = 'DELETE';
 
+    const HEADER_EXTERNAL_KEY = 'ipresso-external-key:';
+
     /**
      * @var resource
      */
