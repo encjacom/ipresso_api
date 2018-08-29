@@ -466,6 +466,21 @@ class ContactService implements ServiceInterface
     }
 
     /**
+     * @param integer $idContact
+     * @param integer $idChild
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function deleteConnection($idContact, $idChild)
+    {
+        return $this
+            ->service
+            ->setRequestPath('contact/' . $idContact . '/connection/' . $idChild)
+            ->setRequestType(Service::REQUEST_METHOD_DELETE)
+            ->request();
+    }
+
+    /**
      * Mass addition of activities to contacts
      * @see http://apidoc.ipresso.pl/v2/en/#mass-addition-of-activities-to-contacts
      * @param MassContactActivity $massContactActivity

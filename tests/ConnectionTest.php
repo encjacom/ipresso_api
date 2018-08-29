@@ -150,6 +150,7 @@ class ConnectionTest extends TestCase
     public function testContactSetConnection(int $idContactParent, int $idContactChild)
     {
         $this->assertGreaterThan(0, $idContactParent);
+
         $this->assertGreaterThan(0, $idContactChild);
 
         $response = $this->class->contact->setConnection($idContactParent, $idContactChild);
@@ -161,29 +162,48 @@ class ConnectionTest extends TestCase
 
     /**
      * @depends testContactAddParent
+     * @depends testContactAddChild
      * @depends testContactSetConnection
      * @param int $idContactParent
+     * @param int $idContactChild
      * @throws Exception
      */
-    public function testContactGetConnection(int $idContactParent)
+    public function testContactGetConnection(int $idContactParent, int $idContactChild)
     {
         $this->assertGreaterThan(0, $idContactParent);
 
+        $this->assertGreaterThan(0, $idContactChild);
+
         $response = $this->class->contact->getConnection($idContactParent);
-
-
-        /**
-         * @TODO
-         */
-        print_r($response);
-        die();
 
         $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
 
         $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
 
         $this->assertObjectHasAttribute('connection', $response->getData());
+
+        $this->assertContains($idContactChild, $response->getData()->connection);
     }
 
+    /**
+     * @depends testContactAddParent
+     * @depends testContactAddChild
+     * @depends testContactGetConnection
+     * @param int $idContactParent
+     * @param int $idContactChild
+     * @throws Exception
+     */
+    public function testContactDeleteConnection(int $idContactParent, int $idContactChild)
+    {
+        $this->assertGreaterThan(0, $idContactParent);
+
+        $this->assertGreaterThan(0, $idContactChild);
+
+        $response = $this->class->contact->deleteConnection($idContactParent, $idContactChild);
+
+        $this->assertInstanceOf(\iPresso\Service\Response::class, $response);
+
+        $this->assertContains($response->getCode(), [\iPresso\Service\Response::STATUS_OK]);
+    }
 
 }
