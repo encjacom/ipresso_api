@@ -10,7 +10,7 @@ use iPresso\Service\ContactService;
 use iPresso\Service\ScenarioService;
 use iPresso\Service\SearchService;
 use iPresso\Service\SegmentationService;
-use iPresso\Service\SourceService;
+use iPresso\Service\OriginService;
 use iPresso\Service\TagService;
 use iPresso\Service\TypeService;
 use iPresso\Service\WebsiteService;
@@ -73,9 +73,9 @@ class iPresso
     public $segmentation;
 
     /**
-     * @var SourceService
+     * @var OriginService
      */
-    public $source;
+    public $origin;
 
     /**
      * @var TagService
@@ -119,7 +119,7 @@ class iPresso
         $this->scenario = new ScenarioService($this->service, $this->serializer);
         $this->search = new SearchService($this->service, $this->serializer);
         $this->segmentation = new SegmentationService($this->service, $this->serializer);
-        $this->source = new SourceService($this->service, $this->serializer);
+        $this->origin = new OriginService($this->service, $this->serializer);
         $this->tag = new TagService($this->service, $this->serializer);
         $this->type = new TypeService($this->service, $this->serializer);
         $this->www = new WebsiteService($this->service, $this->serializer);

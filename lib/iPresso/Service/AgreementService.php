@@ -51,6 +51,7 @@ class AgreementService implements ServiceInterface
     /**
      * Get all available agreements
      * @return bool|Response
+     * @throws \Exception
      */
     public function get()
     {
@@ -82,6 +83,7 @@ class AgreementService implements ServiceInterface
      * Delete agreement
      * @param integer $idAgreement
      * @return bool|Response
+     * @throws \Exception
      */
     public function delete($idAgreement)
     {
@@ -118,6 +120,7 @@ class AgreementService implements ServiceInterface
      * @param integer $idAgreement
      * @param integer|bool $page
      * @return bool|Response
+     * @throws \Exception
      */
     public function getContact($idAgreement, $page = false)
     {
@@ -136,6 +139,7 @@ class AgreementService implements ServiceInterface
      * @param integer $idAgreement
      * @param string $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function deleteContact($idAgreement, $idContact)
     {

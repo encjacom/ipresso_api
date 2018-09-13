@@ -69,22 +69,30 @@ class Type
     }
 
     /**
-     * @param string $parent_key
-     * @return Type
-     */
-    public function setParent($parent_key)
-    {
-        $this->parent = $parent_key;
-        return $this;
-    }
-
-    /**
      * @param string $attribute_key
      * @return Type
      */
     public function addAttribute($attribute_key)
     {
         $this->attribute[] = $attribute_key;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param string $parent
+     * @return Type
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
         return $this;
     }
 

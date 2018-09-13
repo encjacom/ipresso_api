@@ -2,6 +2,10 @@
 
 namespace iPresso\Service;
 
+/**
+ * Class Service
+ * @package iPresso\Service
+ */
 class Service
 {
     const API_VER = 2;

@@ -36,6 +36,7 @@ class CategoryService implements ServiceInterface
      * Get category
      * @param integer|bool $idCategory
      * @return bool|Response
+     * @throws \Exception
      */
     public function get($idCategory = false)
     {
@@ -86,6 +87,7 @@ class CategoryService implements ServiceInterface
      * Delete category
      * @param integer $idCategory
      * @return bool|Response
+     * @throws \Exception
      */
     public function delete($idCategory)
     {
@@ -122,6 +124,7 @@ class CategoryService implements ServiceInterface
      * @param integer $idCategory
      * @param integer|bool $page
      * @return bool|Response
+     * @throws \Exception
      */
     public function getContact($idCategory, $page = false)
     {
@@ -140,6 +143,7 @@ class CategoryService implements ServiceInterface
      * @param integer $idCategory
      * @param string $idContact
      * @return bool|Response
+     * @throws \Exception
      */
     public function deleteContact($idCategory, $idContact)
     {

@@ -5,10 +5,10 @@ namespace iPresso\Service;
 use Itav\Component\Serializer\Serializer;
 
 /**
- * Class SourceService
+ * Class OriginService
  * @package iPresso\Service
  */
-class SourceService implements ServiceInterface
+class OriginService implements ServiceInterface
 {
     /**
      * @var Service
@@ -21,7 +21,7 @@ class SourceService implements ServiceInterface
     private $serializer;
 
     /**
-     * SourceService constructor.
+     * OriginService constructor.
      * @param Service $service
      * @param Serializer $serializer
      */
@@ -32,8 +32,9 @@ class SourceService implements ServiceInterface
     }
 
     /**
-     * Get all contact sources
+     * Get all contact origins
      * @return bool|Response
+     * @throws \Exception
      */
     public function get()
     {
@@ -45,19 +46,20 @@ class SourceService implements ServiceInterface
     }
 
     /**
-     * Get contacts from a given source
-     * @param integer $idSource
+     * Get contacts from a given origin
+     * @param integer $idOrigin
      * @param integer|bool $page
      * @return bool|Response
+     * @throws \Exception
      */
-    public function getContact($idSource, $page = false)
+    public function getContact($idOrigin, $page = false)
     {
         if ($page && is_numeric($page))
             $page = '?page=' . $page;
 
         return $this
             ->service
-            ->setRequestPath('origin/' . $idSource . '/contact' . $page)
+            ->setRequestPath('origin/' . $idOrigin . '/contact' . $page)
             ->setRequestType(Service::REQUEST_METHOD_GET)
             ->request();
     }
