@@ -135,7 +135,7 @@ class Response
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getData()
     {

@@ -244,7 +244,7 @@ class TagTest extends TestCase
 
         $this->assertObjectHasAttribute('count', $response->getData());
 
-        if ($response->getData->count > 0) {
+        if ($response->getData()->count > 0) {
             $this->assertObjectHasAttribute('id', $response->getData());
 
             $this->assertNotContains($idContact, $response->getData()->id);
