@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class OriginTest
  */
-class OriginTest extends TestCase
+class ContactTest extends TestCase
 {
     public static $config = [
         'url' => 'https://panel.local-ipresso.encja.eu',
