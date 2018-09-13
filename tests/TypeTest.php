@@ -137,6 +137,7 @@ class TypeTest extends TestCase
     /**
      * @depends testTypeAdd
      * @depends testContactAdd
+     * @depends testAddContactToType
      * @param string $typeKey
      * @param int $idContact
      * @throws Exception
