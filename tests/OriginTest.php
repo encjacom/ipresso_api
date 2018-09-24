@@ -8,11 +8,11 @@ use PHPUnit\Framework\TestCase;
 class OriginTest extends TestCase
 {
     public static $config = [
-        'url' => 'https://panel.local-ipresso.encja.eu',
-        'login' => 'api',
-        'password' => 'api.API.123',
-        'customerKey' => 'c4ca4238a0b923820dcc509a6f75849b',
-        'token' => 'd9916ea09b85e8ad111adb602edf99d7',
+        'url' => '',
+        'login' => '',
+        'password' => '',
+        'customerKey' => '',
+        'token' => '',
     ];
 
     /**
