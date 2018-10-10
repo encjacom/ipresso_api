@@ -137,7 +137,7 @@ class AgreementService implements ServiceInterface
     /**
      * Delete contact’s agreement
      * @param integer $idAgreement
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */

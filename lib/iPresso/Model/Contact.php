@@ -4,28 +4,29 @@ namespace iPresso\Model;
 
 class Contact
 {
-    const VAR_TYPE = 'type';
-    const VAR_FIRST_NAME = 'fname';
-    const VAR_LAST_NAME = 'lname';
-    const VAR_NAME = 'name';
-    const VAR_EMAIL = 'email';
-    const VAR_PHONE = 'phone';
-    const VAR_MOBILE = 'mobile';
-    const VAR_COMPANY = 'company';
+    const REGION = 'region';
+    const VAR_AGREEMENT = 'agreement';
+    const VAR_BUILDING_NUMBER = 'buildingNumber';
+    const VAR_CATEGORY = 'category';
     const VAR_CITY = 'city';
+    const VAR_COMPANY = 'company';
+    const VAR_COUNTRY = 'country';
+    const VAR_EMAIL = 'email';
+    const VAR_FIRST_NAME = 'fname';
+    const VAR_FLAT_NUMBER = 'flatNumber';
+    const VAR_ID_EXTERNAL = 'idExternal';
+    const VAR_IP = 'ip';
+    const VAR_LAST_NAME = 'lname';
+    const VAR_MOBILE = 'mobile';
+    const VAR_NAME = 'name';
+    const VAR_ORIGIN = 'origin';
+    const VAR_PHONE = 'phone';
     const VAR_POST_CODE = 'postCode';
     const VAR_STREET = 'street';
-    const VAR_BUILDING_NUMBER = 'buildingNumber';
-    const VAR_FLAT_NUMBER = 'flatNumber';
-    const REGION = 'region';
-    const VAR_COUNTRY = 'country';
-    const VAR_CATEGORY = 'category';
     const VAR_TAG = 'tag';
-    const VAR_AGREEMENT = 'agreement';
-    const VAR_ORIGIN = 'origin';
-    const VAR_IP = 'ip';
-    const VAR_WWW = 'www';
+    const VAR_TYPE = 'type';
     const VAR_WORK_POSITION = 'workPosition';
+    const VAR_WWW = 'www';
 
     /**
      * iPresso API null variable
@@ -181,6 +182,11 @@ class Contact
      * @var string
      */
     private $modify_date;
+
+    /**
+     * @var string
+     */
+    private $id_external;
 
     /**
      * @param int $id_contact
@@ -682,6 +688,24 @@ class Contact
     }
 
     /**
+     * @return string
+     */
+    public function getIdExternal()
+    {
+        return $this->id_external;
+    }
+
+    /**
+     * @param string $id_external
+     * @return Contact
+     */
+    public function setIdExternal($id_external)
+    {
+        $this->id_external = $id_external;
+        return $this;
+    }
+
+    /**
      * @return array
      * @throws \Exception
      */
@@ -754,6 +778,9 @@ class Contact
 
         if (!empty($this->work_position))
             $contact[self::VAR_WORK_POSITION] = $this->work_position;
+
+        if (!empty($this->id_external))
+            $contact[self::VAR_ID_EXTERNAL] = $this->id_external;
 
         if (!empty($this->attribute)) {
             foreach ($this->attribute as $apiKey => $value) {

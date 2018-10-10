@@ -142,7 +142,7 @@ class TagService implements ServiceInterface
     /**
      * Delete contact in tag
      * @param integer $idTag
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */

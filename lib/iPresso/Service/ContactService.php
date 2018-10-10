@@ -65,22 +65,22 @@ class ContactService implements ServiceInterface
     /**
      * Edition of a contact with a given ID number
      * @see http://apidoc.ipresso.pl/v2/en/#edition-of-a-contact-with-a-given-id-number
-     * @param $id_contact
+     * @param string $idContact
      * @param Contact $contact
      * @return bool|Response
      * @throws \Exception
      */
-    public function edit($id_contact, Contact $contact)
+    public function edit($idContact, Contact $contact)
     {
-        if (!$id_contact || !is_numeric($id_contact))
-            $id_contact = $contact->getIdContact();
+        if (!$idContact)
+            $idContact = $contact->getIdContact();
 
-        if (!$id_contact)
+        if (!$idContact)
             throw new \Exception('Contact id missing.');
 
         return $this
             ->service
-            ->setRequestPath('contact/' . $id_contact)
+            ->setRequestPath('contact/' . $idContact)
             ->setRequestType(Service::REQUEST_METHOD_PUT)
             ->setPostData(['contact' => $contact->getContact()])
             ->request();
@@ -89,15 +89,15 @@ class ContactService implements ServiceInterface
     /**
      * Delete contact
      * @see http://apidoc.ipresso.pl/v2/en/#delete-contact
-     * @param $id_contact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
-    public function delete($id_contact)
+    public function delete($idContact)
     {
         return $this
             ->service
-            ->setRequestPath('contact/' . $id_contact)
+            ->setRequestPath('contact/' . $idContact)
             ->setRequestType(Service::REQUEST_METHOD_DELETE)
             ->request();
     }
@@ -105,15 +105,15 @@ class ContactService implements ServiceInterface
     /**
      * Collect contact’s data with a given ID number
      * @see http://apidoc.ipresso.pl/v2/en/#collect-contact-39-s-data-with-a-given-id-number
-     * @param integer $id_contact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
-    public function get($id_contact)
+    public function get($idContact)
     {
         return $this
             ->service
-            ->setRequestPath('contact/' . $id_contact)
+            ->setRequestPath('contact/' . $idContact)
             ->setRequestType(Service::REQUEST_METHOD_GET)
             ->request();
     }
@@ -121,7 +121,7 @@ class ContactService implements ServiceInterface
     /**
      * Adding tags to contacts with a given ID
      * @see http://apidoc.ipresso.pl/v2/en/#adding-tags-to-contacts-with-a-given-id
-     * @param integer $idContact
+     * @param string $idContact
      * @param string $tagString
      * @return bool|Response
      * @throws \Exception
@@ -140,7 +140,7 @@ class ContactService implements ServiceInterface
     /**
      * Collecting tags for a contact
      * @see http://apidoc.ipresso.pl/v2/en/#collecting-tags-for-a-contact
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
@@ -156,7 +156,7 @@ class ContactService implements ServiceInterface
     /**
      * Deleting contact’s tag
      * @see http://apidoc.ipresso.pl/v2/en/#deleting-contact-39-s-tag
-     * @param integer $idContact
+     * @param string $idContact
      * @param integer $idTag
      * @return bool|Response
      * @throws \Exception
@@ -173,7 +173,7 @@ class ContactService implements ServiceInterface
     /**
      * Adding category to a contact
      * @see http://apidoc.ipresso.pl/v2/en/#adding-category-to-a-contact
-     * @param integer $idContact
+     * @param string $idContact
      * @param array $categoryIds
      * @return bool|Response
      * @throws \Exception
@@ -192,7 +192,7 @@ class ContactService implements ServiceInterface
     /**
      * Get category for a contact
      * @see http://apidoc.ipresso.pl/v2/en/#get-category-for-a-contact
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
@@ -208,7 +208,7 @@ class ContactService implements ServiceInterface
     /**
      * Deleting contact’s category
      * @see http://apidoc.ipresso.pl/v2/en/#deleting-contact-39-s-category
-     * @param integer $idContact
+     * @param string $idContact
      * @param integer $idCategory
      * @return bool|Response
      * @throws \Exception
@@ -225,7 +225,7 @@ class ContactService implements ServiceInterface
     /**
      * Get integration of the contact
      * @see http://apidoc.ipresso.pl/v2/en/#get-integration-of-the-contact
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
@@ -244,7 +244,7 @@ class ContactService implements ServiceInterface
      * Then add status of the agreement. In the case of acceptance the status equals 1.
      * Parameter `ID_AGREEMENT_STATUS` is agreement status, in the case of activation of agreement enter number 1, in other cases enter 2.
      * @see http://apidoc.ipresso.pl/v2/en/#adding-agreements-to-contacts
-     * @param integer $idContact
+     * @param string $idContact
      * @param array $agreement [ID_AGREEMENT => ID_AGREEMENT_STATUS]
      * @return bool|Response
      * @throws \Exception
@@ -263,7 +263,7 @@ class ContactService implements ServiceInterface
     /**
      * Get contact’s agreements
      * @see http://apidoc.ipresso.pl/v2/en/#get-contact-39-s-agreements
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
@@ -279,7 +279,7 @@ class ContactService implements ServiceInterface
     /**
      * Delete agreement of a given ID from a contact of a given ID
      * @see http://apidoc.ipresso.pl/v2/en/#delete-agreement-of-a-given-id-from-a-contact-of-a-given-id
-     * @param integer $idContact
+     * @param string $idContact
      * @param integer $idAgreement
      * @return bool|Response
      * @throws \Exception
@@ -296,7 +296,7 @@ class ContactService implements ServiceInterface
     /**
      * Adding activity to a contact
      * @see http://apidoc.ipresso.pl/v2/en/#adding-activity-to-a-contact
-     * @param integer $idContact
+     * @param string $idContact
      * @param ContactActivity $contactActivity
      * @return bool|Response
      * @throws \Exception
@@ -315,7 +315,7 @@ class ContactService implements ServiceInterface
     /**
      * Adding activities to a contact
      * @see http://apidoc.ipresso.pl/v2/en/#adding-activity-to-a-contact
-     * @param integer $idContact
+     * @param string $idContact
      * @param ContactActivity[] $contactActivities
      * @return bool|Response
      * @throws \Exception
@@ -339,7 +339,7 @@ class ContactService implements ServiceInterface
     /**
      * Get available activities
      * @see http://apidoc.ipresso.pl/v2/en/#get-available-activities
-     * @param integer $idContact
+     * @param string $idContact
      * @param integer|bool $page
      * @return bool|Response
      * @throws \Exception
@@ -359,7 +359,7 @@ class ContactService implements ServiceInterface
     /**
      * Add actions to contact
      * @see http://apidoc.ipresso.pl/v2/en/#add-actions-to-a-contact
-     * @param integer $idContact
+     * @param string $idContact
      * @param ContactAction $contactAction
      * @return bool|Response
      * @throws \Exception
@@ -378,7 +378,7 @@ class ContactService implements ServiceInterface
     /**
      * Get available actions
      * @see http://apidoc.ipresso.pl/v2/en/#get-actions-of-a-contact
-     * @param integer $idContact
+     * @param string $idContact
      * @param integer|bool $page
      * @return bool|Response
      * @throws \Exception
@@ -398,7 +398,7 @@ class ContactService implements ServiceInterface
     /**
      * Get contact type
      * @see http://apidoc.ipresso.pl/v2/en/#get-contact-types
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
@@ -414,7 +414,7 @@ class ContactService implements ServiceInterface
     /**
      * Setting contact type
      * @see http://apidoc.ipresso.pl/v2/en/#setting-contact-types
-     * @param integer $idContact
+     * @param string $idContact
      * @param string $typeKey
      * @return bool|Response
      * @throws \Exception
@@ -433,7 +433,7 @@ class ContactService implements ServiceInterface
     /**
      * Get connections between contacts
      * @see http://apidoc.ipresso.pl/v2/en/#get-connections-between-contacts
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
@@ -449,8 +449,8 @@ class ContactService implements ServiceInterface
     /**
      * Connect contacts
      * @see http://apidoc.ipresso.pl/v2/en/#connect-contacts
-     * @param integer $idContact
-     * @param integer $idContactToConnect
+     * @param string $idContact
+     * @param string $idContactToConnect
      * @return bool|Response
      * @throws \Exception
      */
@@ -517,7 +517,7 @@ class ContactService implements ServiceInterface
     }
 
     /**
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
@@ -532,7 +532,7 @@ class ContactService implements ServiceInterface
 
     /**
      * Get connections between contacts
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */

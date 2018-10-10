@@ -141,7 +141,7 @@ class CategoryService implements ServiceInterface
     /**
      * Delete contact in category
      * @param integer $idCategory
-     * @param integer $idContact
+     * @param string $idContact
      * @return bool|Response
      * @throws \Exception
      */
