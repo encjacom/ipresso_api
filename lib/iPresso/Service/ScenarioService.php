@@ -49,7 +49,28 @@ class ScenarioService implements ServiceInterface
             ->service
             ->setRequestPath('scenario/' . $key . '/contact')
             ->setRequestType(Service::REQUEST_METHOD_POST)
-            ->setPostData($this->serializer->normalize($scenario))
+            ->setPostData($this->serializer->normalize($scenario, false, false))
+            ->request();
+    }
+
+    /**
+     * Add contacts to scenario
+     * @param string $key
+     * @param Scenario|null $scenario
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function startScenario($key, $scenario = null)
+    {
+        if (!$key) {
+            throw new \Exception('Scenario key is missing.');
+        }
+
+        return $this
+            ->service
+            ->setRequestPath('scenario/' . $key . '/start')
+            ->setRequestType(Service::REQUEST_METHOD_POST)
+            ->setPostData($this->serializer->normalize($scenario, false, false))
             ->request();
     }
 }

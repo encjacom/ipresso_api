@@ -174,7 +174,9 @@ class Service
      */
     public function setPostData($post_data)
     {
-        $this->post_data = http_build_query($post_data);
+        if (!is_null($post_data)) {
+            $this->post_data = http_build_query($post_data);
+        }
         return $this;
     }
 
