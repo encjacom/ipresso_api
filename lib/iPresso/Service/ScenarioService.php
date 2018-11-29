@@ -73,4 +73,23 @@ class ScenarioService implements ServiceInterface
             ->setPostData($this->serializer->normalize($scenario, false, false))
             ->request();
     }
+
+    /**
+     * Add contacts to scenario
+     * @param string $key
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function holdScenario($key)
+    {
+        if (!$key) {
+            throw new \Exception('Scenario key is missing.');
+        }
+
+        return $this
+            ->service
+            ->setRequestPath('scenario/' . $key . '/hold')
+            ->setRequestType(Service::REQUEST_METHOD_POST)
+            ->request();
+    }
 }
