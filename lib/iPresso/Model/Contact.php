@@ -245,9 +245,10 @@ class Contact
      */
     public function setEmail($email)
     {
-        if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL))
-            throw new \Exception('Wrong email address');
-
+        if ($email !== self::$null) {
+            if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL))
+                throw new \Exception('Wrong email address');
+        }
         $this->email = $email;
         return $this;
     }
