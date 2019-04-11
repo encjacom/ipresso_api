@@ -91,9 +91,12 @@ class AttributeService implements ServiceInterface
      */
     public function editOption($attributeKey, AttributeOption $option, $optionKeyEdit = false)
     {
-        $optionAttributeKey = $option->getKey();
-        if ($optionKeyEdit) {
-            $optionAttributeKey = $optionKeyEdit;
+        if (!$optionAttributeKey = $option->getKey()) {
+            if ($optionKeyEdit) {
+                $optionAttributeKey = $optionKeyEdit;
+            } else {
+                throw new \Exception('Attribute option key missing');
+            }
         }
 
         return $this
