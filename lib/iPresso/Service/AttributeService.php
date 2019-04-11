@@ -85,18 +85,21 @@ class AttributeService implements ServiceInterface
      * Edit attribute option
      * @param $attributeKey
      * @param AttributeOption $option
-     * @param bool $optionKeyEdit
+     * @param null|string $optionKeyEdit
      * @return bool|Response
      * @throws \Exception
      */
-    public function editOption($attributeKey, AttributeOption $option, $optionKeyEdit = false)
+    public function editOption($attributeKey, AttributeOption $option, $optionKeyEdit = null)
     {
-        if (!$optionAttributeKey = $option->getKey()) {
-            if ($optionKeyEdit) {
-                $optionAttributeKey = $optionKeyEdit;
-            } else {
-                throw new \Exception('Attribute option key missing');
-            }
+
+        if ($optionKeyEdit && !is_bool($optionKeyEdit)) {
+            $optionAttributeKey = $optionKeyEdit;
+        } else {
+            $optionAttributeKey = $option->getKey();
+        }
+
+        if (!$optionAttributeKey) {
+            throw new \Exception('Attribute option key missing');
         }
 
         return $this
