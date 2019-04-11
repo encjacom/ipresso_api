@@ -92,7 +92,7 @@ class AttributeService implements ServiceInterface
     public function editOption($attributeKey, AttributeOption $option, $optionKeyEdit = null)
     {
 
-        if ($optionKeyEdit && !is_bool($optionKeyEdit)) {
+        if ($optionKeyEdit) {
             $optionAttributeKey = $optionKeyEdit;
         } else {
             $optionAttributeKey = $option->getKey();
