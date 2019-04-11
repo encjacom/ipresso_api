@@ -60,12 +60,9 @@ class AttributeOption
      */
     public function getOption()
     {
-        if (!$this->value) {
-            throw new \Exception('Attribute option value missing');
-        }
-
-        if (!$this->key) {
-            throw new \Exception('Attribute option key missing');
+        if (!$this->value &&
+            !$this->key) {
+            throw new \Exception('Attribute option value and key missing');
         }
 
         return $this;

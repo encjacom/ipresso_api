@@ -83,16 +83,28 @@ class AttributeService implements ServiceInterface
 
     /**
      * Edit attribute option
-     * @param string $attributeKey
+     * @param $attributeKey
      * @param AttributeOption $option
+     * @param null|string $optionKeyEdit
      * @return bool|Response
      * @throws \Exception
      */
-    public function editOption($attributeKey, AttributeOption $option)
+    public function editOption($attributeKey, AttributeOption $option, $optionKeyEdit = null)
     {
+
+        if ($optionKeyEdit) {
+            $optionAttributeKey = $optionKeyEdit;
+        } else {
+            $optionAttributeKey = $option->getKey();
+        }
+
+        if (!$optionAttributeKey) {
+            throw new \Exception('Attribute option key missing');
+        }
+
         return $this
             ->service
-            ->setRequestPath('attribute/' . $attributeKey . '/option/' . $option->getKey())
+            ->setRequestPath('attribute/' . $attributeKey . '/option/' . $optionAttributeKey)
             ->setRequestType(Service::REQUEST_METHOD_PUT)
             ->setPostData(['option' => $this->serializer->normalize($option->getOption())])
             ->request();
