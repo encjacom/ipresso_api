@@ -10,6 +10,7 @@ class Campaign
     const VAR_CONTENT = 'content';
     const VAR_HASH = 'hash';
     const VAR_TOKEN = 'token';
+    const VAR_FILES = 'files';
 
     public $campaign = [];
     /**
@@ -36,6 +37,10 @@ class Campaign
      * @var array
      */
     private $token = [];
+    /**
+     * @var array
+     */
+    private $files = [];
 
     /**
      * @return array
@@ -208,6 +213,34 @@ class Campaign
 
     /**
      * @return array
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @param array $files
+     * @return Campaign
+     */
+    public function setFiles($files)
+    {
+        $this->files = $files;
+        return $this;
+    }
+
+    /**
+     * @param array $file
+     * @return Campaign
+     */
+    public function addFile($file)
+    {
+        $this->files[] = $file;
+        return $this;
+    }
+
+    /**
+     * @return array
      * @throws \Exception
      */
     public function getCampaign()
@@ -229,6 +262,9 @@ class Campaign
 
         if (!empty($this->token))
             $this->campaign[self::VAR_TOKEN] = $this->token;
+
+        if (!empty($this->files))
+            $this->campaign[self::VAR_FILES] = $this->files;
 
         if (empty($this->campaign))
             throw new \Exception('No recipients in campaign');
