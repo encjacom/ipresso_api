@@ -135,6 +135,21 @@ class AgreementService implements ServiceInterface
     }
 
     /**
+     * Get contacts assigned to an agreement that are assigned to group
+     * @param $groupApiKey
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function getAgreementsByGroup($groupApiKey)
+    {
+        return $this
+            ->service
+            ->setRequestPath('agreement/group/' . $groupApiKey)
+            ->setRequestType(Service::REQUEST_METHOD_GET)
+            ->request();
+    }
+
+    /**
      * Delete contact’s agreement
      * @param integer $idAgreement
      * @param string $idContact

@@ -544,4 +544,20 @@ class ContactService implements ServiceInterface
             ->setRequestType(Service::REQUEST_METHOD_GET)
             ->request();
     }
+
+    /**
+     * Get contact’s agreements that are assigned to group
+     * @param string $idContact
+     * @param $groupApiKey
+     * @return bool|Response
+     * @throws \Exception
+     */
+    public function getAgreementsByGroup($idContact, $groupApiKey)
+    {
+        return $this
+            ->service
+            ->setRequestPath('contact/' . $idContact . '/agreement/group/'.$groupApiKey)
+            ->setRequestType(Service::REQUEST_METHOD_GET)
+            ->request();
+    }
 }
