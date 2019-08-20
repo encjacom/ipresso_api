@@ -23,6 +23,7 @@ class Action
     const TYPE_DATETIME = 'datetime';
     const TYPE_BOOL = 'bool';
     const TYPE_MULTI = 'multi';
+    const TYPE_IP = 'ip';
 
     public $action;
 
@@ -52,6 +53,7 @@ class Action
         self::TYPE_DATETIME,
         self::TYPE_BOOL,
         self::TYPE_MULTI,
+        self::TYPE_IP,
     ];
 
     /**
