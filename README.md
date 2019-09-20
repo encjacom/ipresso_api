@@ -4,7 +4,7 @@
 
 ## Documentation
 
-- [API Documentation](http://apidoc.ipresso.pl/v2/en/)
+- [API Documentation](https://apidoc.ipresso.com/)
 
 ## Installation
 
