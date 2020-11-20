@@ -26,6 +26,7 @@ $ipresso->setPassword('password');
 $ipresso->setCustomerKey('customerKey');
 $ipresso->setUrl('https://yourdomain.ipresso.pl');
 $token = $ipresso->getToken();
+$ipresso->setToken($token->data);
 ```
 
 ### Adding new contact
