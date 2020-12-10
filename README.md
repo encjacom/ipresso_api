@@ -4,7 +4,7 @@
 
 ## Documentation
 
-- [API Documentation](http://apidoc.ipresso.pl/v2/en/)
+- [API Documentation](https://apidoc.ipresso.com/)
 
 ## Installation
 
@@ -26,6 +26,7 @@ $ipresso->setPassword('password');
 $ipresso->setCustomerKey('customerKey');
 $ipresso->setUrl('https://yourdomain.ipresso.pl');
 $token = $ipresso->getToken();
+$ipresso->setToken($token->data);
 ```
 
 ### Adding new contact
