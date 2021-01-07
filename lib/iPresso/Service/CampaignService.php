@@ -38,10 +38,11 @@ class CampaignService implements ServiceInterface
      * @param Campaign $campaign
      * @param bool $key
      * @param bool $noContact
+     * @param bool $returnId
      * @return bool|Response
      * @throws \Exception
      */
-    public function send($idCampaign, Campaign $campaign, $key = false, $noContact = false)
+    public function send($idCampaign, Campaign $campaign, $key = false, $noContact = false, $returnId = false)
     {
         /** Przygotowanie parametrów GET */
         $getParam = [];
@@ -50,6 +51,10 @@ class CampaignService implements ServiceInterface
 
         if ($noContact) {
             $getParam['nocontact'] = 1;
+        }
+
+        if ($returnId) {
+            $getParam['returnId'] = 1;
         }
 
         $queryStr = http_build_query($getParam);
