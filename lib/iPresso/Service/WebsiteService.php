@@ -51,16 +51,25 @@ class WebsiteService implements ServiceInterface
     /**
      * Add monitored website
      * @param string $url
+     * @param array $jsApiMethods [method api key => 0|1]
      * @return bool|Response
      * @throws \Exception
      */
-    public function add($url)
+    public function add($url, $jsApiMethods = [])
     {
-        if (!$url || !filter_var($url, FILTER_VALIDATE_URL))
+        if (!$url || !filter_var($url, FILTER_VALIDATE_URL)) {
             throw new \Exception('Set correct URL.');
+        }
+
+        foreach ($jsApiMethods as $methodKey => $isOn) {
+            if (!is_string($methodKey)) {
+                throw new \Exception('Js api method key must be string.');
+            }
+        }
 
         $data = [];
         $data['www']['url'] = $url;
+        $data['www']['js_api_methods'] = $jsApiMethods;
 
         return $this
             ->service

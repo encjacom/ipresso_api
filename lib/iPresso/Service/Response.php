@@ -270,6 +270,15 @@ class Response
             103 => 'Attribute option wrong data',
             104 => 'Attribute option exists',
             105 => 'Category exists',
+            106 => 'External id not exists',
+            107 => 'External id already exists',
+            108 => 'External id group not exists',
+            109 => 'Contact mobile number invalid',
+            110 => 'File wrong data',
+            111 => 'Vendor does not supports attachments',
+            112 => 'IP address blocked',
+            113 => 'User blocked',
+            114 => 'Invalid js method api key',
         ];
 
         if (isset($error_codes[$code])) {
